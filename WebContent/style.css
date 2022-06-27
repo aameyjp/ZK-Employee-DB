@@ -1,0 +1,54 @@
+@charset "ISO-8859-1";
+z-grid {
+    background: #FFFFFF;
+    border: 1px solid #D9D9D9;
+    overflow: hidden;
+    zoom: 1;
+}
+
+.z-textbox, .z-decimalbox, .z-intbox, .z-longbox, .z-doublebox {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    color: rgba(0,0,0,0.9);
+    height: 34px;
+    border: 1px solid #D9D9D9;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border-radius: 0px;
+    padding: 0 8px;
+    line-height: 16px;
+    background: #FFFFFF;
+}
+
+.z-column {
+    background: #134668;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.btno {
+	border-radius: 0px;
+    background-color: #4a88b3;
+}
+
+.cl1{
+	background-color: white;
+	border-color:  #D9D9D9;
+}
+
+.cl2{
+	border-color: rgb(39, 50, 69);
+}
+
+.zr{
+    border-top: 5px solid red;
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+}

@@ -1,0 +1,122 @@
+<?page title="Employee db" contentType="text/html;charset=UTF-8"?>
+<?link  rel="stylesheet" type="text/css" href="style.css"?>
+<zk>
+<window title="Employee db" border="normal" viewModel="@id('vm') @init('com.viewModel.BaseViewModel')">
+
+<grid mold="paging" pageSize="5" model="@bind(vm.baseListModel)"
+emptyMessage="No Employee data"  height="450px" style="border:1px solid rgb(147, 149, 153);">
+
+	<auxhead>
+		<auxheader sclass="cl1">
+			<textbox placeholder="Search" hflex="1" value="@bind(vm.eid)" instant="true" onChange="@command('changeFilter')"></textbox>
+		</auxheader>
+		
+		<auxheader sclass="cl1">
+			<textbox placeholder="Search" hflex="1" value="@bind(vm.name)" instant="true" onChange="@command('changeFilter')"></textbox>
+		</auxheader>
+		
+		<auxheader sclass="cl1">
+			<intbox maxlength="7" format="##,##,###" placeholder="Search" hflex="1" value="@bind(vm.salary)" instant="true" onChange="@command('changeFilter')" constraint="no negative"></intbox>
+		</auxheader>
+		
+		<auxheader sclass="cl1">
+			<textbox placeholder="Search" hflex="1" value="@bind(vm.role)" instant="true" onChange="@command('changeFilter')"></textbox>
+		</auxheader>
+		
+		<auxheader sclass="cl1">
+			<textbox placeholder="Search" hflex="1" instant="true" value="@bind(vm.JD)" onChange="@command('changeFilter')"></textbox>
+			
+		</auxheader>
+		
+		<auxheader sclass="cl1">
+		
+		<bandbox>
+			<bandpopup>
+				<listbox checkmark="true" multiple="true" model="@load(vm.responseList)" selectedItems="@bind(vm.response)" onSelect="@command('changeFilter')">
+		 			<template name="model">
+						<listitem label="@load(each)"></listitem>
+					</template>
+		 		</listbox>
+			</bandpopup>
+		</bandbox>
+		
+		
+		</auxheader>
+		
+		<auxheader sclass="cl1">
+		</auxheader>
+	</auxhead>
+	
+	
+	<columns style="text-align:center;">
+		<column sclass="cl2" label="Eid" sort="auto(eid)" hflex="1"></column>
+		<column sclass="cl2" label="Name" sort="auto(name)" hflex="1"></column>
+		<column sclass="cl2" label="Salary" sort="auto(salary)" hflex="1"></column>
+		<column sclass="cl2" label="Designation" sort="auto(role)" hflex="1"></column>
+		<column sclass="cl2" label="Join date" sort="auto(joinDate)" hflex="1"></column>
+		<column sclass="cl2" label="Responsibilities" hflex="1"></column>
+		<column sclass="cl2" width="37px"></column>
+	</columns>
+	
+	<rows>
+	<template name="model">
+		<row sclass="zr">
+			 
+			<cell>
+				<textbox value="@bind(each.eid)" hflex="1" placeholder="Eid" constraint="no empty" onChange="@command('updateDB', base = each)"></textbox>
+			</cell>
+			<cell>
+				<textbox value="@bind(each.name)" hflex="1" placeholder="Name" constraint="no empty" onChange="@command('updateDB', base=each)"></textbox>
+			</cell>
+			
+			<cell>
+				<intbox maxlength="7" format="##,##,###" value="@bind(each.salary)" hflex="1" placeholder="Salary" onChange="@command('updateDB', base=each)" constraint="no empty, no negative" ></intbox>
+			</cell>
+			
+			<cell>
+				<listbox model="@load(vm.roleList)" mold="select" onSelect="@command('updateDB', base=each)" 
+				selectedItem="@bind(each.role)" hflex="1" height="34px" style="border-color:rgb(187, 195, 201)"> <!-- bind -->
+					<template name="model">
+						<listitem label="@load(each)"></listitem>
+					</template>
+				</listbox>
+			</cell>
+			
+			<cell>
+				<datebox value="@bind(each.joinDate)" hflex="1" placeholder="Join date" constraint="no empty, no future" onChange="@command('updateDB', base=each)"></datebox>
+			</cell>
+			
+			<cell>
+				<bandbox>
+					<bandpopup>                                                                               <!-- bind -->
+						<listbox checkmark="true" multiple="true" model="@load(vm.responseList)" selectedItems="@bind(each.response)" onSelect="@command('updateDB', base=each)">
+							<template name="model">
+								<listitem label="@load(each)"></listitem>
+							</template>
+						</listbox>
+					</bandpopup>
+				</bandbox>
+			</cell>
+			
+			<cell>
+				<image src="/imgs/deleteicon1.png" onClick="@command('deleteDB', base=each)"></image>
+			</cell>
+		</row>
+		
+	</template>	
+	
+	</rows>
+	
+</grid>
+
+<separator></separator>
+
+<div style="text-align: center;">
+	<button sclass="btno" label="Add" onClick="@command('addDB')"> </button>
+	<button sclass="btno" label="Refresh" onClick="@command('refresh')"></button>
+	<button sclass="btno" label="Save" onClick="@command('saveDB')" > </button>
+</div>
+
+</window>
+</zk>
+
